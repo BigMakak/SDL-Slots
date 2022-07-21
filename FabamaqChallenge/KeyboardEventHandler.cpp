@@ -5,7 +5,7 @@ void KeyboardEventHandler::HandleInput(bool &isRunning, CasinoSlot& casinoSlot)
 {
 
 	SDL_Event events;
-	
+	//Poll all the events that have occured 
 	SDL_PollEvent(&events);
 
 	switch (events.type)
@@ -17,7 +17,7 @@ void KeyboardEventHandler::HandleInput(bool &isRunning, CasinoSlot& casinoSlot)
 	default:
 		break;
 	}
-
+	//Check if the player pressed some specific keys 
 	if(events.type == SDL_KEYDOWN) 
 	{
 		switch (events.key.keysym.sym)

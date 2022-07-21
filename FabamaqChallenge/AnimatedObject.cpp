@@ -1,10 +1,12 @@
 #include "AnimatedObject.h"
 #include "TextureLoader.h"
+#include <stdlib.h>
 
 AnimatedObject::AnimatedObject(const char* fileName, int x, int y, int width, int height, int SpriteClips, int ssRows,SDL_Renderer* renderer)
 {
+	//General assignment of all the internal variables
 	gameRenderer = renderer;
-
+	//Loads the texture 
 	objTexture = TextureLoader::LoadTexture(gameRenderer, fileName);
 
 	xPos = x;
@@ -61,7 +63,7 @@ void AnimatedObject::loadSpriteSheet(SDL_Texture* texture)
 	}
 
 	//This values are used to count for the next values of the sprites
-	//One for the wodth, the height and the row
+	//One for the width, the height and the row
 	//When the for loop reaches the max number of rows, we reset the value and increment the nextFrameHeightValue
 	int nextFrameWidth = 0;
 	int nextFrameHeight = 0;

@@ -94,8 +94,6 @@ void Game::handleEvents()
 
 void Game::update() 
 {
-	//TODO: Add State Machine for the Game Loop using Timers
-	counter++;
 
 	casinoSlot->UpdateLoop();
 
@@ -113,14 +111,17 @@ void Game::render()
 
 void Game::limitFrameRate(bool isFrameStart) 
 {
+	//If it's the beginning of the while loop, the inicial frame
 	if(isFrameStart) 
 	{
 		frameStart = SDL_GetTicks();
 	}
 	else
 	{
+		//If not, then we check how much time it took to proceess all the code in that iteration
 		frameTime = SDL_GetTicks() - frameStart;
 
+		//If it was bigger then the desired time, we delay the next frame. So the game can be a loop smoother
 		if(frameDelay > frameTime) 
 		{
 			SDL_Delay(frameDelay - frameTime);

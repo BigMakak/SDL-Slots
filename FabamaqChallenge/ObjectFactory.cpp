@@ -1,6 +1,6 @@
 #include "ObjectFactory.h"
 #include <typeinfo>
-#include <string>
+
 
 ObjectFactory::ObjectFactory(SDL_Renderer* renderer, TTF_Font* font)
 {
@@ -12,16 +12,16 @@ void ObjectFactory::LoadObjects()
 {
     //Add all the text to the game, that can be altered by pressing the inputs
     //They are separeted by 20 pxls 
-    TextUI.insert({ In, new TextObject("Credits In: 0", 10, 20, 150, 50, textColor, gameFont,gameRenderer) });
+    TextUI.insert({ In, new TextObject("Credits In: ", 10, 20, 150, 50, textColor, gameFont,gameRenderer) });
 
-    TextUI.insert({ Out, new TextObject("Credits Out: 0", 590, 20, 150, 50, textColor, gameFont,gameRenderer) });
+    TextUI.insert({ Out, new TextObject("Credits Out: ", 590, 20, 150, 50, textColor, gameFont,gameRenderer) });
 
-    TextUI.insert({ Plays, new TextObject("Plays: 0", 200, 450, 150, 50, textColor, gameFont,gameRenderer) });
+    TextUI.insert({ Plays, new TextObject("Plays: ", 200, 450, 150, 50, textColor, gameFont,gameRenderer) });
 
     //The Slot image for the game
     images.push_back(new ImageObject("Resources/Images/slots.png", 150, 150, 500, 350, gameRenderer));
 
-    //Controlls indications for the player
+    //Controll indications for the player
     images.push_back(new ImageObject("Resources/Images/PressSpace.png", 200, 500, 400, 50, gameRenderer));
 
     images.push_back(new ImageObject("Resources/Images/RightShift.png", 590, 75, 200, 50, gameRenderer));
@@ -37,7 +37,7 @@ void ObjectFactory::LoadObjects()
 
 }
 
-void ObjectFactory::AnimateObjects() 
+void ObjectFactory::AnimateObjects(bool isAnimate) 
 {
     for (auto const& image : images)
     {
@@ -45,11 +45,16 @@ void ObjectFactory::AnimateObjects()
 
         if(animatedObj != nullptr) 
         {
-            printf("Inside the animated Object");
+            //printf("Inside the animated Object");
 
-            animatedObj->Animate(true);
+            animatedObj->Animate(isAnimate);
         }
     }
+}
+
+void ObjectFactory::ChangeUIText(UIText uiText,std::string stringValue) 
+{
+    TextUI.at(uiText)->ChangeText(stringValue);
 }
 
 void ObjectFactory::RenderObjects()

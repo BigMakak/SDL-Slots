@@ -7,7 +7,11 @@
 #include "CasinoSlot.h"
 #include "KeyboardEventHandler.h"
 
-
+/// <summary>
+/// Class that represents the base of the Game
+/// This class works almost has a game engine
+/// Takes care of loading all the assets, handling input, runnning the main Update loop, rendering all the objects into the window and cleaning all the objects created
+/// </summary>
 class Game
 {
 public:
@@ -15,7 +19,7 @@ public:
 
 	~Game();
 
-	//Function that initializes all the processes for the game to start, like the SDL process
+	//Function that initializes all the processes for the game to start, like the SDL subsystem 
 	//Needs a X position and Y position for it's position on Screen
 	//An int for width and height for the total size of the game screen
 	//And a flag to see if the game window is going to occupy the fullscreen or not
@@ -33,7 +37,7 @@ public:
 	//Function that takes care of rendering all the assets of the game
 	void render();
 
-	//Cleans all the varibles that are being used in the game, and closes the SDL process
+	//Cleans and deletes all the objects created and closes all the SDL subsystems
 	void clean();
 
 	//Checks for the current time it took to pass one frame, and delays the next frame if needed
@@ -45,17 +49,15 @@ public:
 	
 
 private:
-
-	int counter = 0;
-
+	//Flag that represents if the Game is running or not
 	bool isRunning = false;
-
+	//The main game window
 	SDL_Window* gWindow = nullptr;
-
+	//An Casino Slot Object that holds all the Game logic and the various objects that populate the game
 	CasinoSlot* casinoSlot = nullptr;
-
+	//The font used in the game
 	TTF_Font* gameFont = nullptr;
-
+	//The main renderer for the game
 	SDL_Renderer* renderer = nullptr;
 
 	

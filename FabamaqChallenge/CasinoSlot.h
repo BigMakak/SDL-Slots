@@ -1,7 +1,10 @@
 #pragma once
 #include "ObjectFactory.h"
+#include "Timer.h"
 
-
+/// <summary>
+/// Enum of the different states of the Game
+/// </summary>
 enum GameState 
 {
 	Stopped,
@@ -13,6 +16,7 @@ enum GameState
 /// <summary>
 /// Class that holds all the game logic
 /// It will be in charge of changing the state of the game
+/// 
 /// </summary>
 class CasinoSlot
 {
@@ -44,24 +48,32 @@ public:
 	void renderGameObjects();
 
 	/// <summary>
-	/// Alters the value of the Play counter
-	/// Used to create
+	/// Modifies the values of the Credits In and Credits out variables
 	/// </summary>
-	/// <param name="isCreditsIn"></param>
+	/// <param name="isCreditsIn">If the player wants to add more credits</param>
 	void modifyCreditsCounter(bool isCreditsIn);
 
 
 private:
 
+	//The state of the game in run-time. Default value is stopped
 	GameState currState = Stopped;
 
+	//The number of credits in the game
 	int CreditsInCounter = 0;
-
+	//Number of Credits that the player got out
 	int CreditsOutCounter = 0;
-
+	//Number of plays that ended
 	int PlaysCounter = 0;
 
-	ObjectFactory* objectFactory;
+	//The max time in miliseconds that the loop is going to run
+	int loopTime = 5000;
+
+	//Objects that the Casino Slots needs to work properly
+	//The Factory of Game Objects that populate the game window
+	ObjectFactory* objectFactory = nullptr;
+	//Timer for counting the time that the game loop is running
+	Timer* timer = nullptr;
 
 };
 
